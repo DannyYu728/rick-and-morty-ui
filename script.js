@@ -6,12 +6,12 @@ let pageDisplay = document.querySelector('h3')
 let pageNum = 1
 
 function imgList(arr) {
-  // console.log(arr);
   let characters = document.querySelector(".character")
-  characters.innerHTML = ""
+  characters.innerText = ""
   arr.forEach((char) => {
     let img = document.createElement("img")
     img.src = char.image
+    img.classList.add("ima")
     characters.appendChild(img)
   });
 }
@@ -28,7 +28,6 @@ nextButton.addEventListener('click', () => {
       return response.json();
     })
     .then(response => {
-      console.log(response)
       imgList(response.results)
     })
 })
@@ -45,7 +44,7 @@ prevButton.addEventListener('click', () => {
       return response.json();
     })
     .then(response => {
-      console.log(response)
       imgList(response.results)
     })
 })
+

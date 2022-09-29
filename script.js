@@ -1,6 +1,9 @@
-const url = 'https://rickandmortyapi.com/api/'
-let characters = document.querySelector(".characterBox")
+const ramUrl = 'https://rickandmortyapi.com/api/'
+const tempWP = 'https://coolthemestores.com/wp-content/uploads/2021/05/rick-and-morty-chrome-theme-wallpaper.jpg'
+const tempWP2 = 'https://play-lh.googleusercontent.com/fVRg0B1Pgo0l93mSrqSnqZSNNcaqEyMGc-Y2qWqhwOE-IhYe1ogAnnFuieK9iZ8VVg'
+let mainBox = document.querySelector(".mainBox")
 let modal = document.querySelector(".modal")
+let buttonChange = document.querySelectorAll('.buttonChange')
 let prevButton = document.querySelector('.prevButton')
 let nextButton = document.querySelector('.nextButton')
 let tabButton = document.querySelectorAll('.tabButton')
@@ -8,65 +11,103 @@ let defaultHead = document.querySelector('.default')
 let pageDisplay = document.querySelector('h3')
 let pageNum = 0
 let pageCount = 0
-//Header Tab
-// defaultHead.style.display = "block";
+//Header Tab and header's Buttons
 defaultHead.classList.add("show")
-tabButton.forEach((tabButton, index) => tabButton.addEventListener("click", function () {
+tabButton.forEach((tabButton) => tabButton.addEventListener("click", function () {
   let tabHead = document.querySelectorAll(".tabHead")
   tabHead.forEach((tabHead) => {
     tabHead.classList.remove("show");
-    // tabHead.style.display = "none";
   })
-  // document.getElementById(tabButton.innerText).style.display = "block";
   document.getElementById(tabButton.innerText).classList.add("show");
-  if (tabButton.innerText == "Characters") {
-    
-  } else if (tabButton.innerText == "Locations") {
-    
-  } else {
-    
-  }
+  buttonChange.forEach((button) => {
+    if (tabButton.innerText == "Characters") {
+      button.classList.add("charButton");
+      button.classList.remove("locButton", "epsButton")
+    } else if (tabButton.innerText == "Locations") {
+      button.classList.add("locButton");
+      button.classList.remove("charButton", "epsButton")
+    } else {
+      button.classList.add("epsButton");
+      button.classList.remove("locButton", "charButton")
+    }
+  })
 }))
-
+//Create Images
 let createIMG = (arr) => {
-  arr.forEach((char) => {
-    let htmlTemplate = `
-    <div class ="charCard" id="${char.id}">
-    <img class ="ima" src ="${char.image}">
-    </div>`
-    characters.insertAdjacentHTML("beforeend", htmlTemplate)
-  });
+  if (buttonChange[0].classList.contains("charButton")) {
+    arr.forEach((imgCard) => {
+      let htmlTemplate = `
+      <div class ="charCard card" id="${imgCard.id}">
+      <img class ="ima" src ="${imgCard.image}">
+      </div>`
+      mainBox.insertAdjacentHTML("beforeend", htmlTemplate)
+    });
+  } else if (buttonChange[0].classList.contains("locButton")) {
+    arr.forEach((loc) => {
+      let htmlTemplate = `
+      <div class ="infoCard card" id="${loc.id}">
+      <p class="pInfo">Location Name: ${loc.name}</p>
+      </div>`
+      mainBox.insertAdjacentHTML("beforeend", htmlTemplate)
+    });
+  } else {
+    arr.forEach((eps) => {
+      let htmlTemplate = `
+      <div class ="infoCard card" id="${eps.id}">
+      <p class="pInfo">Episode Name: ${eps.name}</p>
+      </div>`
+      mainBox.insertAdjacentHTML("beforeend", htmlTemplate)
+    });
+  }
 }
-
-//Character Box Function
+//Modal Box Function
 function imgList(arr) {
-  characters.innerText = ""
+  mainBox.innerText = ""
   createIMG(arr)
-  // arr.forEach((char) => {
-  //   let htmlTemplate = `
-  //   <div class ="charCard" id="${char.id}">
-  //   <img class ="ima" src ="${char.image}">
-  //   </div>`
-  //   characters.insertAdjacentHTML("beforeend", htmlTemplate)
-  // });
-  //Modal
-  let charCards = document.querySelectorAll(".charCard")
-  charCards.forEach((charCards, index) => charCards.addEventListener("click", function (e) {
+  //Modal card
+  let cards = document.querySelectorAll(".card")
+  cards.forEach((cards, index) => cards.addEventListener("click", function () {
     modal.classList.add("show")
     modal.innerText = ""
-    let charId = arr[index]
-    let htmlTemplate = `
-    <div class ="charModal">
-    <img class ="imgModal" src ="${charId.image}">
-    <button class="exit">X</button>
-    <p>ID: ${charId.id}</p>
-    <p>Name: ${charId.name}</p>
-    <p>Status: ${charId.status}</p>
-    <p>Species: ${charId.species}</p>
-    <p>Origin: ${charId.origin.name}</p>
-    <p>Location: ${charId.location.name}</p>
-    </div>`
-    modal.insertAdjacentHTML("beforeend", htmlTemplate)
+    let cardId = arr[index]
+    if (buttonChange[0].classList.contains("charButton")) {
+      let htmlTemplate = `
+      <div class ="charModal">
+      <img class ="imgModal" src ="${cardId.image}">
+      <button class="exit">X</button>
+      <p class="pChar">ID: ${cardId.id}</p>
+      <p class="pChar">Name: ${cardId.name}</p>
+      <p class="pChar">Status: ${cardId.status}</p>
+      <p class="pChar">Species: ${cardId.species}</p>
+      <p class="pChar">Origin: ${cardId.origin.name}</p>
+      <p class="pChar">Location: ${cardId.location.name}</p>
+      </div>`
+      modal.insertAdjacentHTML("beforeend", htmlTemplate)
+    } else if (buttonChange[0].classList.contains("locButton")) {
+      let htmlTemplate = `
+      <div class ="charModal">
+      <img class ="imgModal" src ="${tempWP}">
+      <button class="exit">X</button>
+      <p class="pChar">ID: ${cardId.id}</p>
+      <p class="pChar">Name: ${cardId.name}</p>
+      <p class="pChar">Type: ${cardId.type}</p>
+      <p class="pChar">Dimension: ${cardId.dimension}</p>
+      <p class="pChar">Number of Residents: ${cardId.residents.length}</p>
+      </div>`
+      modal.insertAdjacentHTML("beforeend", htmlTemplate)
+    } else {
+      let htmlTemplate = `
+      <div class ="charModal">
+      <img class ="imgModal" src ="${tempWP2}">
+      <button class="exit">X</button>
+      <p class="pChar">ID: ${cardId.id}</p>
+      <p class="pChar">Name: ${cardId.name}</p>
+      <p class="pChar">Air Date: ${cardId.air_date}</p>
+      <p class="pChar">Episode: ${cardId.episode}</p>
+      <p class="pChar">Number of Characters: ${cardId.characters.length}</p>
+      </div>`
+      modal.insertAdjacentHTML("beforeend", htmlTemplate)
+    }
     let exit = document.querySelector('.exit')
     exit.addEventListener('click', () => {
       modal.textContent = ""
@@ -74,15 +115,25 @@ function imgList(arr) {
     })
   }))
 }
-//GET Character pages
-async function fetchCharacters() {
-  let response = await axios(url + `character?page=${pageNum}`)
-  pageCount = response.data.info.pages
-  imgList(response.data.results)
+async function fetchie() {
+  if (buttonChange[0].classList.contains("charButton")) {
+    let response = await axios(ramUrl + `character?page=${pageNum}`)
+    pageCount = response.data.info.pages
+    imgList(response.data.results)
+  } else if (buttonChange[0].classList.contains("locButton")) {
+    let response = await axios(ramUrl + `location/?page=${pageNum}`)
+    pageCount = response.data.info.pages
+    imgList(response.data.results)
+  } else {
+    let response = await axios(ramUrl + `episode/?page=${pageNum}`)
+    pageCount = response.data.info.pages
+    imgList(response.data.results)
+  }
+
 }
 let pageDown = () => {
   if (pageNum == 0) {
-    pageNum = 42
+    pageNum = pageCount + 1
   } else if (pageNum > 1) {
     pageNum = pageNum - 1
   } else {
@@ -101,12 +152,12 @@ let pageUp = () => {
 //Previous Button
 prevButton.addEventListener('click', () => {
   pageDown()
-  fetchCharacters()
+  fetchie()
 })
 //Next Button
 nextButton.addEventListener('click', () => {
   pageUp()
-  fetchCharacters()
+  fetchie()
 })
 
 

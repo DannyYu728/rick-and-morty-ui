@@ -16,7 +16,8 @@ h1 {
   text-shadow: 5px 5px 5px black;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: white;
   font-size: 25px;
   text-shadow: 5px 5px 5px black;
@@ -47,7 +48,7 @@ h2, h3 {
 
 .tabButton {
   background-color: rgba(45, 45, 45, 1);
-  color: rgba(151, 206, 76, 1);
+  color: #e89ac7;
   border: none;
   padding: 15px 15px;
   font-size: 15px;
@@ -71,7 +72,7 @@ main {
   min-height: 500px;
 }
 
-.characterBox {
+.mainBox {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -79,9 +80,24 @@ main {
 }
 
 .ima {
-  border: 5px solid green;
+  border: 5px solid #97ce4c;
   width: 200px;
   height: 200px
+}
+
+.infoCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100px;
+  border: 4px solid #97ce4c;
+  background-color: #44281d;
+}
+
+.pInfo {
+  text-align: center;
+  color: #e89ac7
 }
 
 .test {
@@ -120,7 +136,7 @@ main {
   border: solid #97ce4c 2px;
 }
 
-p {
+.pChar {
   text-align: center;
   box-sizing: border-box;
   width: 100%;

@@ -7,7 +7,7 @@ let tabButton = document.querySelectorAll('.tabButton')
 let defaultHead = document.querySelector('.default')
 let pageDisplay = document.querySelector('h3')
 let pageNum = 0
-
+let pageCount = 0
 //Header Tab
 defaultHead.style.display = "block";
 tabButton.forEach(tabButton => tabButton.addEventListener("click", function () {
@@ -24,16 +24,15 @@ function imgList(arr) {
     let htmlTemplate = `
     <div class ="charCard" id="${char.id}">
     <img class ="ima" src ="${char.image}">
-    </div>
-    `
+    </div>`
     characters.insertAdjacentHTML("beforeend", htmlTemplate)
   });
+  //Modal
   let charCards = document.querySelectorAll(".charCard")
-  charCards.forEach(charCards => charCards.addEventListener("click", function () {
+  charCards.forEach((charCards, index) => charCards.addEventListener("click", function (e) {
     modal.classList.add("show")
     modal.innerText = ""
-    let charId = arr[charCards.id - 1]
-    console.log(arr)
+    let charId = arr[index]
     let htmlTemplate = `
     <div class ="charModal">
     <img class ="imgModal" src ="${charId.image}">
@@ -53,29 +52,29 @@ function imgList(arr) {
       })
   }))
 }
-
-
-
-
 //GET Character pages
 async function fetchCharacters() {
+  // let pages = await axios(url + `character`)
+  // pageCount = pages.data.info.pages
   let response = await axios(url + `character?page=${pageNum}`)
+    pageCount = response.data.info.pages
   imgList(response.data.results)
-  // console.log(response.data.results)
+  console.log(response.data.info.pages)
 }
+
 //Previous Button
 prevButton.addEventListener('click', () => {
   if (pageNum > 1) {
     pageNum = pageNum - 1
   } else {
-    pageNum = 42
+    pageNum = pageCount
   }
   pageDisplay.innerText = pageNum
   fetchCharacters()
 })
 //Next Button
 nextButton.addEventListener('click', () => {
-  if (pageNum < 42) {
+  if (pageNum < pageCount) {
     pageNum = pageNum + 1
   } else {
     pageNum = 1

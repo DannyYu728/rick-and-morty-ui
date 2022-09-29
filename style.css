@@ -118,7 +118,7 @@ main {
   border: 5px solid #97ce4c;
   width: 220px;
   height: 220px;
-  animation: 3s infinite alternate gradient;
+  animation: 6s infinite alternate gradient;
 }
 
 @keyframes gradient {
@@ -127,15 +127,15 @@ main {
   }
 
   25% {
-    background-color: red;
+    background-color: #76b1eb;
   }
 
   50% {
-    background-color: orange;
+    background-color: #eb4614;
   }
 
   100% {
-    background-color: #44281d;
+    background-color: #8504b9;
   }
 }
 

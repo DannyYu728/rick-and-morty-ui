@@ -9,17 +9,26 @@ let pageDisplay = document.querySelector('h3')
 let pageNum = 0
 let pageCount = 0
 //Header Tab
-defaultHead.style.display = "block";
-tabButton.forEach(tabButton => tabButton.addEventListener("click", function () {
+// defaultHead.style.display = "block";
+defaultHead.classList.add("show")
+tabButton.forEach((tabButton, index) => tabButton.addEventListener("click", function () {
   let tabHead = document.querySelectorAll(".tabHead")
   tabHead.forEach((tabHead) => {
-    tabHead.style.display = "none";
+    tabHead.classList.remove("show");
+    // tabHead.style.display = "none";
   })
-  document.getElementById(tabButton.innerText).style.display = "block";
+  // document.getElementById(tabButton.innerText).style.display = "block";
+  document.getElementById(tabButton.innerText).classList.add("show");
+  if (tabButton.innerText == "Characters") {
+    
+  } else if (tabButton.innerText == "Locations") {
+    
+  } else {
+    
+  }
 }))
-//Character Box Function
-function imgList(arr) {
-  characters.innerText = ""
+
+let createIMG = (arr) => {
   arr.forEach((char) => {
     let htmlTemplate = `
     <div class ="charCard" id="${char.id}">
@@ -27,6 +36,19 @@ function imgList(arr) {
     </div>`
     characters.insertAdjacentHTML("beforeend", htmlTemplate)
   });
+}
+
+//Character Box Function
+function imgList(arr) {
+  characters.innerText = ""
+  createIMG(arr)
+  // arr.forEach((char) => {
+  //   let htmlTemplate = `
+  //   <div class ="charCard" id="${char.id}">
+  //   <img class ="ima" src ="${char.image}">
+  //   </div>`
+  //   characters.insertAdjacentHTML("beforeend", htmlTemplate)
+  // });
   //Modal
   let charCards = document.querySelectorAll(".charCard")
   charCards.forEach((charCards, index) => charCards.addEventListener("click", function (e) {
@@ -49,37 +71,41 @@ function imgList(arr) {
     exit.addEventListener('click', () => {
       modal.textContent = ""
       modal.classList.remove("show")
-      })
+    })
   }))
 }
 //GET Character pages
 async function fetchCharacters() {
-  // let pages = await axios(url + `character`)
-  // pageCount = pages.data.info.pages
   let response = await axios(url + `character?page=${pageNum}`)
-    pageCount = response.data.info.pages
+  pageCount = response.data.info.pages
   imgList(response.data.results)
-  console.log(response.data.info.pages)
 }
-
-//Previous Button
-prevButton.addEventListener('click', () => {
-  if (pageNum > 1) {
+let pageDown = () => {
+  if (pageNum == 0) {
+    pageNum = 42
+  } else if (pageNum > 1) {
     pageNum = pageNum - 1
   } else {
     pageNum = pageCount
   }
   pageDisplay.innerText = pageNum
-  fetchCharacters()
-})
-//Next Button
-nextButton.addEventListener('click', () => {
+}
+let pageUp = () => {
   if (pageNum < pageCount) {
     pageNum = pageNum + 1
   } else {
     pageNum = 1
   }
   pageDisplay.innerText = pageNum
+}
+//Previous Button
+prevButton.addEventListener('click', () => {
+  pageDown()
+  fetchCharacters()
+})
+//Next Button
+nextButton.addEventListener('click', () => {
+  pageUp()
   fetchCharacters()
 })
 

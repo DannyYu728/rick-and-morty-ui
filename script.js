@@ -14,6 +14,7 @@ let pageCount = 0
 //Header Tab and header's Buttons
 defaultHead.classList.add("show")
 tabButton.forEach((tabButton) => tabButton.addEventListener("click", function () {
+  mainBox.innerText = ""
   let tabHead = document.querySelectorAll(".tabHead")
   tabHead.forEach((tabHead) => {
     tabHead.classList.remove("show");
@@ -21,12 +22,15 @@ tabButton.forEach((tabButton) => tabButton.addEventListener("click", function ()
   document.getElementById(tabButton.innerText).classList.add("show");
   buttonChange.forEach((button) => {
     if (tabButton.innerText == "Characters") {
+      pageNum = 0
       button.classList.add("charButton");
       button.classList.remove("locButton", "epsButton")
     } else if (tabButton.innerText == "Locations") {
+      pageNum = 0
       button.classList.add("locButton");
       button.classList.remove("charButton", "epsButton")
     } else {
+      pageNum = 0
       button.classList.add("epsButton");
       button.classList.remove("locButton", "charButton")
     }
@@ -59,6 +63,7 @@ let createIMG = (arr) => {
       mainBox.insertAdjacentHTML("beforeend", htmlTemplate)
     });
   }
+  morty()
 }
 //Modal Box Function
 function imgList(arr) {
@@ -132,8 +137,8 @@ async function fetchie() {
 
 }
 let pageDown = () => {
-  if (pageNum == 0) {
-    pageNum = pageCount + 1
+  if (pageNum > pageCount) {
+    pageNum = 1
   } else if (pageNum > 1) {
     pageNum = pageNum - 1
   } else {
@@ -142,12 +147,36 @@ let pageDown = () => {
   pageDisplay.innerText = pageNum
 }
 let pageUp = () => {
-  if (pageNum < pageCount) {
+if (pageNum < pageCount) {
     pageNum = pageNum + 1
   } else {
     pageNum = 1
   }
   pageDisplay.innerText = pageNum
+}
+
+let morty = () => {
+  let morty = document.createElement("div")
+  let cat = document.createElement("div")
+  morty.classList.add("morty")
+  cat.classList.add("cat")
+  mainBox.appendChild(morty)
+  mainBox.appendChild(cat)
+
+  let moving = () => {
+    let topSpeed = `${Math.floor(Math.random() * window.innerHeight)}px`
+    let leftSpeed = `${Math.floor(Math.random() * window.innerWidth)}px`
+    morty.style.top = topSpeed;
+    morty.style.left = leftSpeed;
+  }
+  setInterval(moving, 1000)
+  let movingCat = () => {
+    let topSpeed = `${Math.floor(Math.random() * window.innerHeight)}px`
+    let leftSpeed = `${Math.floor(Math.random() * window.innerWidth)}px`
+    cat.style.top = topSpeed;
+    cat.style.left = leftSpeed;
+  }
+  setInterval(movingCat, 1000)
 }
 //Previous Button
 prevButton.addEventListener('click', () => {
@@ -160,7 +189,7 @@ nextButton.addEventListener('click', () => {
   fetchie()
 })
 
-
+morty()
 
 
 

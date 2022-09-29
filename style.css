@@ -1,15 +1,70 @@
-body {
-  background-image: url("https://wallpapercave.com/wp/wp5079698.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+body,
+html {
+  height: 100%;
+  margin: 0;
+  background-color: whitesmoke;
 }
 
 header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  padding-bottom: 10px;
 }
-.character {
+
+.tabButton {
+  background-color: rgba(45, 45, 45, 1);
+  color: rgba(151, 206, 76, 1);
+  border: none;
+  padding: 15px 15px;
+  font-size: 15px;
+  width: 33.33%;
+}
+
+.tabButton:hover {
+  background-image: url("https://c.tenor.com/BgR83Df82t0AAAAj/portal-rick-and-morty.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: rgba(151, 206, 76, 0);
+}
+
+.tabHead {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1750px 500px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+#Characters {
+  background-image: url("https://images6.alphacoders.com/909/thumb-1920-909641.png");
+}
+
+#Locations {
+  background-image: url("https://wallpapermoon.com/wp-content/uploads/2022/06/01740190.jpg");
+}
+
+#Episodes {
+  background-image: url("https://images.hdqwalls.com/wallpapers/rick-and-morty-uy.jpg");
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: whitesmoke;
+  padding-bottom: 10px;
+  min-height: 500px;
+}
+
+.characterBox {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -18,8 +73,14 @@ header {
 
 .ima {
   border: 5px solid green;
+  width: 200px;
+  height: 200px
 }
 
-h3 {
-  color: white;
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: rgba(45, 45, 45, 1);
 }

@@ -6,22 +6,39 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="script.js" defer></script>
   <title>RickandMorty</title>
 </head>
 
 <body>
   <header>
-    <button class="prevButton">Previous Character</button>
-    <button class="nextButton">Next Character</button>
+    <div id="Characters" class="tabHead default">
+      <h1>Characters</h1>
+      <p>“Wubba Lubba Dub Dub!” — Rick</p>
+    </div>
+    <div id="Locations" class="tabHead">
+      <h1>Locations</h1>
+      <p>The Citadel</p>
+    </div>
+    <div id="Episodes" class="tabHead">
+      <h1>Episodes</h1>
+      <p>“Nobody exists on purpose. Nobody belongs anywhere. We’re all going to die. Come watch TV.” — Morty</p>
+    </div>
+    <button class="tabButton">Characters</button>
+    <button class="tabButton">Locations</button>
+    <button class="tabButton">Episodes</button>
   </header>
-  <main>
-    <div class="character"></div>
-  </main>
-  <footer>
-    <h3></h3>
-  </footer>
 
+  <main>
+    <div class="characterBox"></div>
+  </main>
+
+  <footer>
+    <button class="button prevButton">Previous Character</button>
+    <h3>0</h3>
+    <button class="button nextButton">Next Character</button>
+  </footer>
 </body>
 
 </html>

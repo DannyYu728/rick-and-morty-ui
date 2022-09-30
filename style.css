@@ -6,6 +6,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: url("./img/cursor.cur"), auto;
 }
 
 header {
@@ -66,6 +67,7 @@ h3 {
   background-repeat: no-repeat;
   background-size: contain;
   color: rgba(151, 206, 76, 0);
+  cursor: url("./img/cursor.cur"), auto;
 }
 
 main {
@@ -213,37 +215,39 @@ main {
   border: none;
   background-color: rgba(232, 154, 199, 0.0);
   top: 10px;
-  right:30px;
-  color: 	#97ce4c;
+  right: 30px;
+  color: #97ce4c;
   font-size: 20px;
 }
 
 .exit:hover {
-color: red;
+  color: red;
 }
 
 footer {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: baseline;
   background-color: rgba(45, 45, 45, 1);
 }
 
 .buttonChange {
-  margin-left: 50px;
-  margin-bottom: 20px;
-  margin-right: 50px;
-  color: white;
-  background-color: #e89ac7;
-  width: 100px;
-  height: 50px;
-  border-radius: 10%;
-  text-shadow: 2px 2px 5px black;
-  filter: drop-shadow(1px 8px 5px white);
-  font-family: 'Nabla';
-  font-size: 12px;
-  
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(1px 8px 5px green);
+  background-image: url("https://i.gifer.com/origin/99/99dd4a153bb847e79a1617db8f1c620a.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px 80px;
+}
+
+.prevButton {
+  margin-left: 500px;
+  transform: scaleX(-1);
+  filter: drop-shadow(1px 8px 5px red);
+}
+
+.nextButton {
+  margin-right: 500px;
 }
 
 .morty {
@@ -271,4 +275,34 @@ footer {
   background-size: cover;
   z-index: 1;
   filter: drop-shadow(0px 20px 15px black);
+}
+@media only screen and (max-width: 1000px) {
+  .body,
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  .buttonChange {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .body,
+  html {
+    height: 100%;
+    max-width: 100%;
+  }
+  .buttonChange {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  footer {
+    width: 100%;
+  }
 }

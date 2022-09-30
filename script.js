@@ -123,7 +123,6 @@ function imgList(arr) {
 async function fetchie() {
   if (buttonChange[0].classList.contains("charButton")) {
     let response = await axios(ramUrl + `character?page=${pageNum}`)
-    console.log(response.data)
     pageCount = response.data.info.pages
     imgList(response.data.results)
   } else if (buttonChange[0].classList.contains("locButton")) {

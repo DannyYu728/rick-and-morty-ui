@@ -13,7 +13,6 @@ html {
 header {
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 10px;
 }
 
 h1 {
@@ -33,7 +32,7 @@ h3 {
 .tabHead {
   color: white;
   display: none;
-  padding: 50px;
+  padding: 50px 0px 50px 0px;
   text-align: center;
   width: 100%;
   background-position: center;
@@ -317,13 +316,16 @@ footer {
 
 @media only screen and (max-width: 400px) {
 
+h1 {
+font-size: 30px
+}
   .tabHead {
     max-width: 400px;
   }
 
   .buttonChange {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 
 
